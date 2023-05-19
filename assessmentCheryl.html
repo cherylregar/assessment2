@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Assessment Cheryl </title>
+</head>
+<body>
+    <table id="data-table">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; padding: 8px; background-color: #d8d8d8;">Flight Number</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Mission Name</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #d8d8d8;">Launch Date</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Details</th>
+            </tr>
+        </thead>
+        <tbody id="data-table-body">
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "https://api.spacexdata.com/v5/launches/latest",
+                type: "GET",
+                success: function(response) {
+                    var launches = [response];
+
+                    // Tampilkan data dalam tabel manual
+                    var tableBody = $("#data-table-body");
+                    for (var i = 0; i < launches.length; i++) {
+                        var row = "<tr>";
+                        row += "<td style='border: 1px solid black; padding: 8px;'>" + launches[i].flight_number + "</td>";
+                        row += "<td style='border: 1px solid black; padding: 8px;'>" + launches[i].name + "</td>";
+                        row += "<td style='border: 1px solid black; padding: 8px;'>" + launches[i].date_local + "</td>";
+                        row += "<td style='border: 1px solid black; padding: 8px;'>" + launches[i].details + "</td>";
+                        row += "</tr>";
+                        tableBody.append(row);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
