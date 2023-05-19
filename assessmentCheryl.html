@@ -6,9 +6,9 @@
 <body>
     <form id="api-form">
         <label for="flight-number">Flight Number:</label>
-        <input type="text" id="flight-number" name="flight-number"><br><br>
+        <input type="text" id="flight-number" name="flight-number" required><br><br>
         <label for="mission-name">Mission Name:</label>
-        <input type="text" id="mission-name" name="mission-name"><br><br>
+        <input type="text" id="mission-name" name="mission-name" required><br><br>
         <input type="submit" value="Submit">
     </form>
     
@@ -57,6 +57,16 @@
                 var flightNumber = $("#flight-number").val();
                 var missionName = $("#mission-name").val();
 
+
+                if (flightNumber.trim() === "") {
+                    alert("Flight Number is required.");
+                    return;
+                }
+
+                if (missionName.trim() === "") {
+                    alert("Mission Name is required.");
+                    return;
+                }
 
                 console.log("Flight Number: " + flightNumber);
                 console.log("Mission Name: " + missionName);
