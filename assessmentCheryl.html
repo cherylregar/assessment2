@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Assessment Cheryl </title>
+    <title>Assessment Cheryl</title>
 </head>
 <body>
+    <form id="api-form">
+        <label for="flight-number">Flight Number:</label>
+        <input type="text" id="flight-number" name="flight-number"><br><br>
+        <label for="mission-name">Mission Name:</label>
+        <input type="text" id="mission-name" name="mission-name"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    
     <table id="data-table">
         <thead>
             <tr>
@@ -27,7 +35,6 @@
                 success: function(response) {
                     var launches = [response];
 
-                    // Tampilkan data dalam tabel manual
                     var tableBody = $("#data-table-body");
                     for (var i = 0; i < launches.length; i++) {
                         var row = "<tr>";
@@ -42,6 +49,17 @@
                 error: function(xhr, status, error) {
                     console.log(error);
                 }
+            });
+
+            $("#api-form").submit(function(event) {
+                event.preventDefault();
+
+                var flightNumber = $("#flight-number").val();
+                var missionName = $("#mission-name").val();
+
+
+                console.log("Flight Number: " + flightNumber);
+                console.log("Mission Name: " + missionName);
             });
         });
     </script>
